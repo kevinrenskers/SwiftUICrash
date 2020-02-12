@@ -8,12 +8,16 @@ struct RootView: View {
   @EnvironmentObject private var store: AppStore
 
   var body: some View {
-    Group {
-      if store.showingDetails {
-        DetailsView()
-      } else {
-        ListView()
+    NavigationView {
+      Group {
+        if store.showingDetails {
+          DetailsView()
+        } else {
+          ListView()
+        }
       }
+      .navigationBarTitle("")
+      .navigationBarHidden(true)
     }
   }
 }
