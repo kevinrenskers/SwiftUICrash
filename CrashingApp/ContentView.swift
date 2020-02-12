@@ -1,23 +1,46 @@
 import SwiftUI
+import UIKit
 
 final class AppStore: ObservableObject {
   @Published var showingDetails = true
 }
 
+struct CustomImage: UIViewRepresentable {
+  var image: UIImage
+  var frame: CGRect
+
+  func makeUIView(context: Context) -> UIView {
+    print(frame)
+
+    let imageView = UIImageView(frame: frame)
+    imageView.contentMode = .scaleAspectFill
+    imageView.clipsToBounds = true
+    imageView.translatesAutoresizingMaskIntoConstraints = false
+    imageView.image = image
+
+    let view = UIView(frame: frame)
+    view.translatesAutoresizingMaskIntoConstraints = false
+
+    view.addSubview(imageView)
+
+    return view
+  }
+
+  func updateUIView(_ uiView: UIView, context: Context) {
+  }
+}
+
+
 struct RootView: View {
   @EnvironmentObject private var store: AppStore
 
   var body: some View {
-    NavigationView {
-      Group {
-        if store.showingDetails {
-          DetailsView()
-        } else {
-          ListView()
-        }
+    Group {
+      if store.showingDetails {
+        DetailsView()
+      } else {
+        ListView()
       }
-      .navigationBarTitle("")
-      .navigationBarHidden(true)
     }
   }
 }
@@ -29,11 +52,8 @@ struct DetailsView: View {
     NavigationView {
       ZStack {
         GeometryReader { geo in
-          Image("bg")
-            .resizable()
-            .aspectRatio(contentMode: .fill)
+          CustomImage(image: UIImage(named: "bg")!, frame: CGRect(x: 0, y: 0, width: geo.size.width, height: geo.size.height))
             .edgesIgnoringSafeArea(.all)
-            .frame(width: geo.size.width, height: geo.size.height)
         }
 
         Button("List") {
