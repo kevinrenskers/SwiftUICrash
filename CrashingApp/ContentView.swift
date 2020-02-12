@@ -1,7 +1,7 @@
 import SwiftUI
 
 final class AppStore: ObservableObject {
-  @Published var showingDetails = false
+  @Published var showingDetails = true
 }
 
 struct RootView: View {
@@ -40,6 +40,8 @@ struct DetailsView: View {
       }
       .navigationBarTitle(Text("Details"))
       .navigationBarItems(trailing: trailingNavigationBarItem)
+
+      Text("Hello iPad!")
     }
   }
 
