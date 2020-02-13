@@ -10,8 +10,6 @@ struct CustomImage: UIViewRepresentable {
   var frame: CGRect
 
   func makeUIView(context: Context) -> UIView {
-    print(frame)
-
     let imageView = UIImageView(frame: frame)
     imageView.contentMode = .scaleAspectFill
     imageView.clipsToBounds = true
@@ -53,8 +51,9 @@ struct DetailsView: View {
       ZStack {
         GeometryReader { geo in
           CustomImage(image: UIImage(named: "bg")!, frame: CGRect(x: 0, y: 0, width: geo.size.width, height: geo.size.height))
-            .edgesIgnoringSafeArea(.all)
-        }
+            .frame(width: geo.size.width, height: geo.size.height)
+          }
+          .edgesIgnoringSafeArea(.all)
 
         Button("List") {
           self.store.showingDetails = false // <- this works fine
