@@ -7,8 +7,9 @@ final class AppStore: ObservableObject {
 struct RootView: View {
   @EnvironmentObject private var store: AppStore
 
+  @ViewBuilder
   var body: some View {
-    Group {
+    VStack {
       if store.showingDetails {
         DetailsView()
       } else {
