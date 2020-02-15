@@ -51,9 +51,8 @@ struct DetailsView: View {
       ZStack {
         GeometryReader { geo in
           CustomImage(image: UIImage(named: "bg")!, frame: CGRect(x: 0, y: 0, width: geo.size.width, height: geo.size.height))
-            .frame(width: geo.size.width, height: geo.size.height)
-          }
-          .edgesIgnoringSafeArea(.all)
+        }
+        .edgesIgnoringSafeArea(.all)
 
         Button("List") {
           self.store.showingDetails = false // <- this works fine
